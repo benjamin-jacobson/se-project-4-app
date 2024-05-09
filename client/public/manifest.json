@@ -1,0 +1,9 @@
+{
+  "short_name": "Ben React App",
+  "name": "Ben React App Name",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
