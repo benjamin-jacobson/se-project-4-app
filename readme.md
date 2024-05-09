@@ -39,6 +39,4 @@ mkdir preject
 - clean the client folder to a basic app
 - set config for proxy
 - server config setup
-- server basic app setup
-- client basic page for home
-- push up work
+
