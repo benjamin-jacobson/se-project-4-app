@@ -1,9 +1,9 @@
-import Flask
-from flask_bcrypt import bcrypt
-from flask_migrate import flask_migrate
+from flask import Flask
+from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 from flask_restful import Api
-from flask_sql_alchemy import sqlalchemy_serializer
-from sqlalchemy import MetData # TODO what do?
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
 
 app = Flask(__name__)
 
@@ -20,5 +20,5 @@ db = SQLAlchemy(metadata=metadata)
 migrate = Migrate(app,db)
 db.init_app(app) # TODO what do?
 
-bcryp = Bcrypt(app)
+bcrypt = Bcrypt(app)
 api = Api(app)

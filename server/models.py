@@ -10,5 +10,5 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, unique = True, nullable = False)
     _password_hash = db.Column(db.String)
 
-    __repr__(self)__:
+    def __repr__(self):
         return f'<id: {id}, username: {username}>'
