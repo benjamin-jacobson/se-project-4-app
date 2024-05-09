@@ -18,13 +18,7 @@ mkdir preject
 
 
 # Initial Launch Commands 
-- 
-
-# Next Step
-- run command locals for app (not Honcho)
-- run app
-- push up work
-
+- Connect to GitHub repository
 # Activating Pipenv (python code)
 - pipenv shell
 
@@ -37,3 +31,14 @@ mkdir preject
 
 
 # connect to git
+
+- 
+
+# Next Step
+- run command locals for app (not Honcho)
+- clean the client folder to a basic app
+- set config for proxy
+- server config setup
+- server basic app setup
+- client basic page for home
+- push up work
