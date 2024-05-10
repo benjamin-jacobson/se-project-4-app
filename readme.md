@@ -42,3 +42,8 @@ Set Proxy  in client/package.json to   "proxy": "http://localhost:5555",
 - server config setup
 
 - clean client/public/index.htlm
+
+
+
+# Useful Resources
+- Routes v6 https://github.com/learn-co-curriculum/react-hooks-react-router-code-along-v6/blob/master/src/components/UserCard.js
