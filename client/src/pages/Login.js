@@ -4,7 +4,7 @@ function Login() {
   return (
     <>
       <header>
-      <NavBar />
+      {/* <NavBar /> shouldnt have a navbar for login content*/}
       </header>
       <main>
         <h1>Login</h1>
