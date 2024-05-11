@@ -7,8 +7,18 @@ import Signup from "../pages/Signup";
 import LoginSignup from "../pages/LoginSignup.js"
 
 function App() {
-  const [user, setUser] = useState(false); //useState(null);
+  const [user, setUser] = useState(null); //useState(null);
 
+  useEffect(() => {
+    // auto-login
+    fetch("/check_session").then((r) => {
+      if (r.ok) {r.json().then((user) => setUser(user));
+      } else if (r.status === 204) {setUser(null);}
+    });
+  }, []);
+
+  console.log(user)
+  
   return(
   <main>
   {user ? (<Home />) : (<LoginSignup />)}
@@ -17,5 +27,3 @@ function App() {
 }
 
 export default App;
-
-
