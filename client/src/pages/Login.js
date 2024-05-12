@@ -12,12 +12,12 @@ function Login() {
         <form>
           <div>
             <label for="username">Username: </label>
-            <input id="username" type="text" name="username" placeholder="Username" />
+            <input id="username" type="text" name="username" placeholder="Username" autoComplete="current-username"/>
           </div>
           <br/>
           <div>
             <label for="password">Password: </label>
-            <input id="password" type="password" name="password" placeholder="Password" />
+            <input id="password" type="password" name="password" placeholder="Password" autoComplete="current-password"/>
           </div>
           <br/>
           <button type="submit">Submit</button>
@@ -30,3 +30,5 @@ function Login() {
 };
 
 export default Login;
+
+{/* <input id="password" type="password" name="password" placeholder="Password" autocomplete="current-password"></input> */}
