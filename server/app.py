@@ -54,7 +54,7 @@ class Login(Resource):
 class Logout(Resource):
     def delete(self):
         session['user_id'] = None
-        return {}, 204
+        return {"message": "204: Logged out successfully"}, 204
 
 class Users(Resource):
     def get(self):
