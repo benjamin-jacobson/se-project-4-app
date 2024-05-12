@@ -3,7 +3,7 @@ import { useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 
-function LoginSignup(){
+function LoginSignup({setUser}){
     const [showLogin, setShowLogin] = useState(true)
 
     return(
@@ -13,7 +13,7 @@ function LoginSignup(){
                 (
                     <>
                     <p> Log in page</p>
-                    < Login />
+                    < Login setUser={setUser}/>
                     <p>Don't have an account? Make on!</p>
                     <button onClick={()=>setShowLogin(false)}>Signup</button>
                     </>
@@ -22,7 +22,7 @@ function LoginSignup(){
                 (
                     <>
                     <p> Signup page</p>
-                    <Signup />
+                    <Signup setUser={setUser}/>
                     <p>Already have an account? Log in instead!</p>
                     <button onClick={()=>setShowLogin(true)}>Login</button>
                     </>

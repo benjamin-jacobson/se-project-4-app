@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar";
 
-function Login() {
+function Login({setUser}) {
   return (
     <>
       <header>
@@ -30,5 +30,3 @@ function Login() {
 };
 
 export default Login;
-
-{/* <input id="password" type="password" name="password" placeholder="Password" autocomplete="current-password"></input> */}

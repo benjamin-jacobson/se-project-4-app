@@ -15,13 +15,11 @@ function App() {
       if (r.ok) {r.json().then((user) => setUser(user));
       } else if (r.status === 204) {setUser(null);}
     });
-  }, []);  // need to fix the issues occuring on the promise and the endpoint. Not sure what it is.
-
-  console.log(user)
+  }, []);
   
   return(
   <main>
-  {user ? (<Home />) : (<LoginSignup />)}
+  {user ? (<Home />) : (<LoginSignup setUser={setUser}/>)}
   </main>
   )
 }
