@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import UserCard from "../components/UserCard";
-import NavBar from "../components/NavBar";
-
-function Home() {
+// import NavBar from "../components/NavBar";
+import Header from "../components/Headers";
+function Home({handleLogout}) {
 
   const [users, setUsers] = useState([])
 
@@ -20,9 +20,10 @@ function Home() {
 
   return (
     <>
-      <header>
+      {/* <header>
         <NavBar />
-      </header>
+      </header> */}
+      <Header handleLogout= {handleLogout}/>
       <main>
         <h1>Home !</h1>
         {userList}

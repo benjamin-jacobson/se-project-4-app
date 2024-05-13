@@ -9,6 +9,10 @@ import LoginSignup from "../pages/LoginSignup.js"
 function App() {
   const [user, setUser] = useState(null); //useState(null);
 
+  function handleLogin(user) {setUser(user);} // TODO edits HERE !!!!!!
+
+  function handleLogout() {setUser(null);}
+
   useEffect(() => {
     // auto-login
     fetch("/check_session").then((r) => {
@@ -19,7 +23,7 @@ function App() {
   
   return(
   <main>
-  {user ? (<Home />) : (<LoginSignup setUser={setUser}/>)}
+  {user ? (<Home handleLogout={handleLogout}/>) : (<LoginSignup setUser={setUser} />)}
   </main>
   )
 }
