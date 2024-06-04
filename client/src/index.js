@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import NoAccess from "./pages/NoAccess.js";
 
 const router = createBrowserRouter([
     {
@@ -35,9 +36,13 @@ const router = createBrowserRouter([
         element: <About />
     },
     {
-    path: "/login",
-    element: <Login />
-    },
+      path: "/noaccess",
+      element: <NoAccess />
+  },
+    // {
+    // path: "/login",
+    // element: <Login />
+    // },
 
   ]);
 

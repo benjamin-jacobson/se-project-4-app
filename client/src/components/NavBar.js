@@ -5,14 +5,15 @@ function NavBar() {
 
   return (
     <nav>
-      <NavLink to="/home">  Home</NavLink>
+      <NavLink to="/home">Home</NavLink>
       <NavLink to="/about"> About</NavLink>
       <NavLink to="/login"> Login</NavLink>
+      <NavLink to="/noaccess"> NoAccess</NavLink>
     </nav>
   )
 }
   
-  export default NavBar;
+export default NavBar;
 
 
   // import React from "react";

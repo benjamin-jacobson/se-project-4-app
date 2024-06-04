@@ -11,19 +11,23 @@ function App() {
 
   function handleLogin(user) {setUser(user);} // TODO edits HERE !!!!!!
 
-  function handleLogout() {setUser(null);}
-
   useEffect(() => {
     // auto-login
     fetch("/check_session").then((r) => {
       if (r.ok) {r.json().then((user) => setUser(user));
       } else if (r.status === 204) {setUser(null);}
     });
-  }, []);
+  }, []); // TODO does this need to run every time the APP loads, or just certain pages?
+
+  // function handleLogout() {setUser(null);}
+  function handleLogout() {console.log("iraaaefasabennnnn");}
+  console.log("I ran 3")
+  console.log(handleLogout)
+  console.log("I ran 4")
   
   return(
   <main>
-  {user ? (<Home handleLogout={handleLogout}/>) : (<LoginSignup setUser={setUser} />)}
+  {user ? (<Home handleLogout={handleLogout} user={user}/>) : (<LoginSignup setUser={setUser} />)}
   </main>
   )
 }

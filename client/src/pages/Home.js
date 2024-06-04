@@ -1,49 +1,39 @@
 import { useState, useEffect } from "react"
 import UserCard from "../components/UserCard";
-// import NavBar from "../components/NavBar";
-import Header from "../components/Headers";
-function Home({handleLogout}) {
+import Header from "../components/Header";
 
-  const [users, setUsers] = useState([])
+function Home({user, handleLogout}) {
+  console.log("I ran 1")
+  console.log(handleLogout); // Should log the function
+  console.log("I ran 2")
+  const [allUsers, setAllUsers] = useState([])
+
+  function handleLogoooooout () {
+    console.log("blahhhhhh")
+  }
 
   useEffect(() =>{
     fetch("/users")
       .then(r => r.json())
-      .then(data => setUsers(data))
+      .then(data => setAllUsers(data))
       .catch(error => console.error(error))
   }, [])
 
-  const userList = users.map(
+  const userList = allUsers.map(
     user => {
     return <UserCard key={user.id} user={user} />
   });
 
+
   return (
     <>
-      {/* <header>
-        <NavBar />
-      </header> */}
-      <Header handleLogout= {handleLogout}/>
+      <Header handleLogout={handleLogoooooout}/>
       <main>
-        <h1>Home !</h1>
+        <h1>Home Page!</h1>
         {userList}
       </main>
     </>
-
   )
-
-
-};
+}
 
 export default Home;
-
-
-// function Home({ user }) {
-//   if (user) {
-//     return <h1>Welcome, {user.username}!</h1>;
-//   } else {
-//     return <h1>Please Login or Sign Up</h1>;
-//   }
-// }
-
-// export default Home;

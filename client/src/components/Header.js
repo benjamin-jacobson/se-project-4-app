@@ -2,11 +2,15 @@ import React from 'react';
 import NavBar from './NavBar';
 import Logout from './Logout';
 
-function Header() {
+function Header({handleLogout}) {
+  // function handleLogoooooout () {
+  //   console.log("blahhhhhh")
+  // }
+  
   return (
     <header>
       <NavBar />
-      <Logout />
+      <Logout handleLogout={handleLogout} />
     </header>
   )
 

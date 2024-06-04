@@ -7,11 +7,12 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from dotenv import load_dotenv
 
-load_dotenv('./secrets.env')
+load_dotenv('server/secrets.env')
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_APP_SECRET_KEY')
 x = os.getenv('FLASK_APP_SECRET_KEY')
+# print(f'FLASK_APP_SECRET_KEY: {x}')
 # app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x1a\x10K' #TODO delete 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

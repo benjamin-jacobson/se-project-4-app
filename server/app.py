@@ -21,6 +21,7 @@ class ClearSession(Resource):
     def delete(self):
     
         session['user_id'] = None
+        session['session'] = None
 
         return {}, 204
 
@@ -57,15 +58,21 @@ class Login(Resource):
         username = request.get_json()['username']
         password = request.get_json()['password']
         user = User.query.filter(User.username == username).first()
-        if user.authenticate(password):
-            session['user_id'] = user.id
-            return user.to_dict(), 200
-        return {'error': '401 Unauthorized'}, 401
+        print(f'=========checking user {user}')
+        if user:
+            if user.authenticate(password):
+                session['user_id'] = user.id
+                return user.to_dict(), 200
+            else:
+                return {'error': '401 Unauthorized'}, 401
+        return {'error': '401 Unauthorized User None'}, 401
 
 class Logout(Resource):
     def delete(self):
-        session['user_id'] = None
+        if session.get('user_id'):
+            session['user_id'] = None
         return {"message": "204: Logged out successfully"}, 204
+
 
 class Users(Resource):
     def get(self):
