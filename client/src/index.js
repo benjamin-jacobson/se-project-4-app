@@ -16,34 +16,32 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoAccess from "./pages/NoAccess.js";
+//ErrorPage
 
 const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />
-    },
-    {
-      path: "/signup",
-      element: <Signup />
-      },
-      {
-        path:"/home",
-        element:<Home />
-      },
+      element: <App />,
+      // errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/signup",
+          element: <Signup />
+          },
+          {
+            path:"/home",
+            element:<Home />
+          },
 
-    {
-        path: "/about",
-        element: <About />
-    },
-    {
-      path: "/noaccess",
-      element: <NoAccess />
-  },
-    // {
-    // path: "/login",
-    // element: <Login />
-    // },
-
+        {
+            path: "/about",
+            element: <About />
+        },
+        {
+          path: "/noaccess",
+          element: <NoAccess />}
+        ]
+      }
   ]);
 
   

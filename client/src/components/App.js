@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Outlet } from "react-router-dom";
 
 import Home from '../pages/Home'
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import LoginSignup from "../pages/LoginSignup.js"
+import Header from "../components/Header";
+
 
 function App() {
   const [user, setUser] = useState(null); //useState(null);
@@ -27,7 +29,13 @@ function App() {
   
   return(
   <main>
-  {user ? (<Home handleLogout={handleLogout} user={user}/>) : (<LoginSignup setUser={setUser} />)}
+    
+  {user ? (<>
+          <Header handleLogout={handleLogout}/>
+          <Outlet />
+          {/* <Home handleLogout={handleLogout} user={user}/> */}
+          </>) 
+  : (<LoginSignup setUser={setUser} />)}
   </main>
   )
 }

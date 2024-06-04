@@ -7,7 +7,7 @@ function NoAccess() {
       {/* <header>
         <NavBar />
       </header> */}
-      <Header />
+      {/* <Header /> */}
       <main>
         <h1>This is No Access Page, error page component.</h1>
       </main>

@@ -7,7 +7,7 @@ function About() {
       {/* <header>
         <NavBar />
       </header> */}
-      <Header />
+      {/* <Header /> */}
       <main>
         <h1>This is About component.</h1>
       </main>

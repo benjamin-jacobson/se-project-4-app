@@ -8,9 +8,9 @@ function Home({user, handleLogout}) {
   console.log("I ran 2")
   const [allUsers, setAllUsers] = useState([])
 
-  function handleLogoooooout () {
-    console.log("blahhhhhh")
-  }
+  // function handleLogoooooout () {
+  //   console.log("blahhhhhh")
+  // }
 
   useEffect(() =>{
     fetch("/users")
@@ -27,7 +27,7 @@ function Home({user, handleLogout}) {
 
   return (
     <>
-      <Header handleLogout={handleLogoooooout}/>
+      {/* <Header handleLogout={handleLogoooooout}/> */}
       <main>
         <h1>Home Page!</h1>
         {userList}
