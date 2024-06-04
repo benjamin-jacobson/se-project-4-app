@@ -12,7 +12,7 @@ function Logout({handleLogout}) {
       }
       //return r.json();
       handleLogout() // setting user state var as null
-      // window.location.replace("/login");
+      window.location.replace("/"); // redirect home if logout //add a come back soon and another redirect
   })
 .catch((error) => {console.error('There was a problem with the logout request:', error);
 });

@@ -25,8 +25,8 @@ function SignUp({setUser}){
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
-        window.location.href = "/login";
+        r.json().then((user) => setUser(user)); // OR could make them still log in by redirecting to app "/" and not setting user
+        window.location.href = "/home";
       }
     });
   }

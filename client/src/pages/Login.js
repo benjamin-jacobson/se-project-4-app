@@ -21,8 +21,8 @@ function Login({setUser}) {
       //setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => setUser(user));
-        console.log("Logged in and redirecting to /")
-        navigate("/");
+        console.log("Logged in and redirecting to /home")
+        navigate("/home");
       } else {
         // r.json().then((err) => setErrors(err.errors));
         console.log("There was an issue with response OK logging in Ben")
