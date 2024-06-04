@@ -11,7 +11,7 @@ function Header({handleLogout}) {
   return (
     <header>
       <NavBar />
-      <Outlet />
+      {/* <Outlet />  THIS WAS CAUSING duplicate rending of the components!*/}
       <Logout handleLogout={handleLogout} />
     </header>
   )
