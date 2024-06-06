@@ -41,3 +41,16 @@ class User(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'User {self.username}, ID: {self.id}'
+
+    # relationships 
+    friends = db.relationship('Friend', backref='user')
+
+class Friend(db.Model, SerializerMixin):
+    __tablename__ = "friends"
+
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String, nullable = False)
+    birthday = db.Column(db.Date, nullable = True)
+    favorite_color = db.Column(db.String, nullable = True)
+
+    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
