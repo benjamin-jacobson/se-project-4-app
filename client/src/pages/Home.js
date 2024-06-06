@@ -3,14 +3,8 @@ import UserCard from "../components/UserCard";
 import Header from "../components/Header";
 
 function Home({user, handleLogout}) {
-  console.log("I ran 1")
-  console.log(handleLogout); // Should log the function
-  console.log("I ran 2")
-  const [allUsers, setAllUsers] = useState([])
 
-  // function handleLogoooooout () {
-  //   console.log("blahhhhhh")
-  // }
+  const [allUsers, setAllUsers] = useState([])
 
   useEffect(() =>{
     fetch("/users")
@@ -24,10 +18,8 @@ function Home({user, handleLogout}) {
     return <UserCard key={user.id} user={user} />
   });
 
-
   return (
     <>
-      {/* <Header handleLogout={handleLogoooooout}/> */}
       <main>
         <h1>Home Page!</h1>
         {userList}
