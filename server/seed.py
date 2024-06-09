@@ -1,35 +1,35 @@
 from random import randint, choice
 from faker import Faker
+from datetime import datetime
 
 from app import app
-from models import db, User
+from models import db, Friend #User
 
 
 
 with app.app_context():
 
-    User.query.delete()
+    Friend.query.delete()
 
     fake = Faker()
 
-    # make sure users have unique usernames
-    users = []
-    usernames = []
+    test_color_options = ['red','yellow','blue']
+    friends_list = []
+    for i in range(5):
 
-    samples = 5
-    for i in range(samples):
-        username = fake.first_name()
-
-        # Getting a unique username
-        while username in usernames:
-            username = fake.first_name()
-        usernames.append(username)
-
-        user = User(
-            username = username
+        dob_str = fake.date_of_birth().isoformat()
+        
+        friend = Friend(
+            user_id = 1,
+            name = fake.name(),
+            birthday = datetime.strptime(dob_str, '%Y-%m-%d').date(), # datetime not string
+            # birthday = fake.date_of_birth(minimum_age=18, maximum_age=65).
+            favorite_color = choice(test_color_options) # randomly choose a color from above
+            
         )
 
-        users.append(user)
+        friends_list.append(friend)
 
-        db.session.add_all(users)
-        db.session.commit()
+    db.session.add_all(friends_list)
+    
+    db.session.commit()

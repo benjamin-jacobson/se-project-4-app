@@ -79,6 +79,18 @@ class Users(Resource):
         users = [u.to_dict() for u in User.query.all()]
         return make_response(users,201)
 
+class Friends(Resource):
+    def get(self):
+        user = User.query.filter(User.id == session['user_id']).first()
+        friends = [f.to_dict() for f in user.friends]
+        return make_response(friends,201)
+    # def post(self):
+    #     request_json = request.get_json()
+
+    #     name = request_json['name']
+
+        
+
 api.add_resource(ClearSession, '/clear', endpoint='clear')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -86,6 +98,7 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 
 api.add_resource(Users, '/users', endpoint='users')
+api.add_resource(Users, '/friends', endpoint='friends')
 
 
 if __name__ == '__main__':
