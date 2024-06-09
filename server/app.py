@@ -3,7 +3,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db, api
-from models import User
+from models import User, Friend
 
 # @app.before_request
 # def check_if_logged_in():
@@ -84,12 +84,54 @@ class Friends(Resource):
         user = User.query.filter(User.id == session['user_id']).first()
         friends = [f.to_dict() for f in user.friends]
         return make_response(friends,201)
-    # def post(self):
-    #     request_json = request.get_json()
+    def post(self):
+        data = request.get_json()
+    
+        name = data['name']
+        favorite_color = data['favorite_color']
 
-    #     name = request_json['name']
+        try:
+            new_friend = Friend(
+                name = name,
+                favorite_color = favorite_color,
+                user_id=session['user_id'],
+            )
 
+            db.session.add(new_friend)
+            db.session.commit()
+
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
         
+        return make_response(new_friend.to_dict(), 201)
+
+class FriendById(Resource):
+    def get(self, id):
+        response_dict = Friend.query.filter_by(id=id).first().to_dict()
+        response = make_response(response_dict,200,)
+        return response
+    
+    def delete(self, id):
+        record = Friend.query.filter_by(id=id).first()
+        db.session.delete(record)
+        db.session.commit()
+        response_dict = {"message": "Record successfully deleted"}
+
+        response = make_response(response_dict, 200)
+        return response
+
+    def patch(self, id):
+        record = Friend.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(record, attr, request.form[attr])
+
+        db.session.add(record)
+        db.session.commit()
+
+        response_dict = record.to_dict()
+
+        response = make_response(response_dict, 200 )
+        return response
 
 api.add_resource(ClearSession, '/clear', endpoint='clear')
 api.add_resource(Signup, '/signup', endpoint='signup')
@@ -98,7 +140,9 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 
 api.add_resource(Users, '/users', endpoint='users')
-api.add_resource(Users, '/friends', endpoint='friends')
+
+api.add_resource(Friends, '/friends', endpoint='friends')
+api.add_resource(FriendsByID, '/friends/<int:id>')
 
 
 if __name__ == '__main__':
