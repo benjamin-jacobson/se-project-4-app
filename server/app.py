@@ -142,7 +142,7 @@ api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Users, '/users', endpoint='users')
 
 api.add_resource(Friends, '/friends', endpoint='friends')
-api.add_resource(FriendsByID, '/friends/<int:id>')
+api.add_resource(FriendById, '/friends/<int:id>')
 
 
 if __name__ == '__main__':
