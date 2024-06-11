@@ -47,6 +47,14 @@ class User(db.Model, SerializerMixin):
     # relationships 
     friends = db.relationship('Friend', backref='user')
 
+
+friend_meetings = db.Table(
+    'friend_meetings',
+    # metadata,
+    db.Column('friend_id', db.Integer, db.ForeignKey('friends.id'), primary_key=True),
+    db.Column('meeting_id', db.Integer, db.ForeignKey('meetings.id'), primary_key=True)
+)
+
 class Friend(db.Model, SerializerMixin):
     __tablename__ = "friends"
 
@@ -55,4 +63,21 @@ class Friend(db.Model, SerializerMixin):
     birthday = db.Column(db.Date, nullable = True)
     favorite_color = db.Column(db.String, nullable = True)
 
-    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer(), db.ForeignKey('users.id')) # for logged in user
+
+    meetings = db.relationship('Meeting', secondary=friend_meetings, back_populates='friends') # Relationship mapping the friends to related meetings
+
+class Meeting(db.Model):
+    __tablename__ = 'meetings'
+
+    id = db.Column(db.Integer, primary_key=True)
+    topic = db.Column(db.String)
+    scheduled_time = db.Column(db.DateTime)
+    location = db.Column(db.String)
+    type = db.Column(db.String)
+
+    # Relationship mapping the meeting to related employees
+    friends = db.relationship('Friend', secondary=friend_meetings, back_populates='meetings')
+
+    def __repr__(self):
+        return f'<Meeting {self.id}, {self.topic}, {self.scheduled_time}, {self.location}>'

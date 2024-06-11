@@ -9,7 +9,8 @@ function NavBar() {
       <NavLink to="/friends"> Friends</NavLink>
       <NavLink to="/about"> About</NavLink>
       {/* <NavLink to="/login"> Login</NavLink> */}
-      <NavLink to="/noaccess"> NoAccess</NavLink>
+      <NavLink to="/meetings"> Meetings</NavLink>
+      {/* <NavLink to="/noaccess"> NoAccess</NavLink> */}
     </nav>
   )
 }

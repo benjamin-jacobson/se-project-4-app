@@ -14,9 +14,10 @@ import App from "./components/App.js";
 import Home from "./pages/Home";
 import Friends from "./pages/Friends.js";
 import About from "./pages/About";
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoAccess from "./pages/NoAccess.js";
+import Meetings from "./pages/Meetings.js";
 //ErrorPage
 
 const router = createBrowserRouter([
@@ -28,8 +29,9 @@ const router = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path:"friends", element: <Friends />},
       { path: "about", element: <About /> },
-      { path: "login", element: <Login /> },
+      // { path: "login", element: <Login /> },
       { path: "signup", element: <Signup /> },
+      { path: "meetings", element: <Meetings /> },
       { path: "noaccess", element: <NoAccess /> },
     ],
   },
