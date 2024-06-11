@@ -18,10 +18,6 @@ function Friends() {
       .catch(error => console.error(error))
   }, [])
 
-  console.log("I ran 1")
-  console.log(friends)
-  console.log("I ran 2")
-
   const handleAddFriend = (addFriend) => {
     const updatedFriendsArray = [...friends, addFriend];
     setFriends(updatedFriendsArray);
@@ -64,13 +60,3 @@ function Friends() {
 };
 
 export default Friends;
-
-
-
-// const handleUpdatePlant = (updatedPlant) => {
-//   const updatedPlantsArray = plants.map(plant => {
-//     if (plant.id === updatedPlant.id) return updatedPlant
-//     else return plant;  
-//   });
-//   setPlants(updatedPlantsArray);
-// }

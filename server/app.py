@@ -3,7 +3,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db, api
-from models import User, Friend
+from models import User, Friend, Activity, Meeting
 
 # @app.before_request
 # def check_if_logged_in():
@@ -133,6 +133,31 @@ class FriendById(Resource):
         response = make_response(response_dict, 200 )
         return response
 
+class Meetups(Resource):
+    
+    def post(self): 
+        try:
+            meetup = Meeting(
+                date= request.json["date"],
+                friend_id = request.json["friend_id"],
+                activity_id = request.json["activity_id"]
+            )
+            
+            db.session.add(meetup)
+            db.session.commit()
+            
+            return meetup.activity.to_dict(), 201
+        
+        except:
+            return {"error": "400: Validation error"}, 400
+
+class Activities(Resource):
+    def get(self):
+        activities = [u.to_dict() for u in Activity.query.all()] # TODO this isnt working ugggghhh needed for the form on meetings ///newMeetup
+        return make_response(activities,201)
+
+api.add_resource(Activities, '/activities', endpoint='activities')
+api.add_resource(Meetups, "/meetups") 
 api.add_resource(ClearSession, '/clear', endpoint='clear')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')

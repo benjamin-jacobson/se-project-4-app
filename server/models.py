@@ -1,20 +1,6 @@
-# from sqlalchemy.ext.hybrid import hybrid_property
-# from sqlalchemy_serializer import SerializerMixin
-
-# from config import db, bcrypt
-
-# class User(db.Model, SerializerMixin):
-#     __tablename__ = 'users'
-
-#     id = db.Column(db.Integer, primary_key = True)
-#     username = db.Column(db.String, unique = True, nullable = False)
-#     _password_hash = db.Column(db.String)
-
-#     def __repr__(self):
-#         return f'<id: {id}, username: {username}>'
-
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from config import db, bcrypt
 
@@ -47,14 +33,6 @@ class User(db.Model, SerializerMixin):
     # relationships 
     friends = db.relationship('Friend', backref='user')
 
-
-friend_meetings = db.Table(
-    'friend_meetings',
-    # metadata,
-    db.Column('friend_id', db.Integer, db.ForeignKey('friends.id'), primary_key=True),
-    db.Column('meeting_id', db.Integer, db.ForeignKey('meetings.id'), primary_key=True)
-)
-
 class Friend(db.Model, SerializerMixin):
     __tablename__ = "friends"
 
@@ -65,19 +43,37 @@ class Friend(db.Model, SerializerMixin):
 
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id')) # for logged in user
 
-    meetings = db.relationship('Meeting', secondary=friend_meetings, back_populates='friends') # Relationship mapping the friends to related meetings
+    # meetings = db.relationship('Meeting', secondary=friend_meetings, back_populates='friends') # Relationship mapping the friends to related meetings
 
-class Meeting(db.Model):
-    __tablename__ = 'meetings'
+    meetings = db.relationship("Meeting", backref= "friend")
+    activities = association_proxy("meetings", "activity")
+    serialize_rules = ("-meetings.friend",)
+
+class Activity(db.Model,SerializerMixin):
+    __tablename__ = 'activities'
 
     id = db.Column(db.Integer, primary_key=True)
-    topic = db.Column(db.String)
-    scheduled_time = db.Column(db.DateTime)
+    name = db.Column(db.String)
     location = db.Column(db.String)
     type = db.Column(db.String)
 
-    # Relationship mapping the meeting to related employees
-    friends = db.relationship('Friend', secondary=friend_meetings, back_populates='meetings')
+    meetings = db.relationship("Meeting", cascade="all,delete", backref= "activity")
+    serialize_only = ("id", "name", "location","type")
 
     def __repr__(self):
         return f'<Meeting {self.id}, {self.topic}, {self.scheduled_time}, {self.location}>'
+
+
+class Meeting(db.Model, SerializerMixin):
+    __tablename__ = 'meetings'
+
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date)
+    
+    friend_id = db.Column(db.Integer, db.ForeignKey("friends.id"))
+    activity_id = db.Column(db.Integer, db.ForeignKey("activities.id"))
+
+    serialize_rules = ("-friend.meetings", "-activity.meetings")
+
+    
+    
