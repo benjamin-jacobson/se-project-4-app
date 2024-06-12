@@ -2,7 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 
-function Signup() {
+function Signup({setUser}) {
 
   const loginValidationSchema = yup.object().shape({
     // email: yup
@@ -15,7 +15,7 @@ function Signup() {
       .required('Username is Required'),
     password: yup
       .string()
-      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .min(3, ({ min }) => `Password must be at least ${min} characters`)
       .required('Password is required'),
   })
 
@@ -25,7 +25,23 @@ function Signup() {
       <Formik
       validationSchema={loginValidationSchema}
         initialValues={{ email: '', password: '' }}
-        onSubmit={values => console.log(values)}
+        onSubmit={values => {
+                  fetch("signup", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                  }).then(
+                    (res) => {
+                      if (res.ok) {
+                        res.json().then((user) => setUser(user)); // OR could make them still log in by redirecting to app "/" and not setting user
+                        window.location.href = "/home";
+                    }
+                  }
+                  )
+                }
+              }
+        
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, }) => (
           <form onSubmit={handleSubmit}>
