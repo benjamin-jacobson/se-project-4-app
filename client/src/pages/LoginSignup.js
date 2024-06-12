@@ -34,7 +34,3 @@ function LoginSignup({setUser}){
 };
 
 export default LoginSignup;
-
-
-
-// https://github.com/learn-co-curriculum/python-p4-iam-putting-it-all-together-lab/blob/main/client/src/pages/Login.js

@@ -1,62 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
+import { Formik } from "formik";
+import * as yup from "yup";
 
-// function Signup(){
-//   return(
-//     <h1>This is a signup page</h1>
-//   )
-// }
+function Signup() {
 
-
-function SignUp({setUser}){
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  function handleSubmit(event) {
-    event.preventDefault()
-
-    fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user)); // OR could make them still log in by redirecting to app "/" and not setting user
-        window.location.href = "/home";
-      }
-    });
-  }
-  // form below
+  const loginValidationSchema = yup.object().shape({
+    // email: yup
+    //   .string()
+    //   .email("Please enter valid email")
+    //   .required('Email Address is Required'),
+    username: yup
+      .string()
+      .min(3, ({ min }) => `Username must be at least ${min} characters`)
+      .required('Username is Required'),
+    password: yup
+      .string()
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .required('Password is required'),
+  })
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Ben Sign Up</h1>
-        <label htmlFor="username">Username</label>
-        <input 
-        type="text"
-        id="username"
-        autoComplete="current-username"
-        value={username}
-        onChange={(event) => setUsername(event.target.value)}
-        />
-
-        <label htmlFor="password">Password</label>
-        <input
-        type="password"
-        id="password"
-        autoComplete="current-password"
-        value={password}
-        onChange={(event)=>setPassword(event.target.value)}
-        />
-      <button type="submit">Sign Up</button>
-      </form>
+    <div className="loginContainer">
+      <h1>Login Screen</h1>
+      <Formik
+      validationSchema={loginValidationSchema}
+        initialValues={{ email: '', password: '' }}
+        onSubmit={values => console.log(values)}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, errors, }) => (
+          <form onSubmit={handleSubmit}>
+            {/* <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              onChange={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+            {errors.email &&<h1 style={{ fontSize: 10, color: 'red' }}>{errors.email}</h1>} */}
+              <input
+              type="username"
+              name="username"
+              placeholder="Username"
+              onChange={handleChange('username')}
+              onBlur={handleBlur('username')}
+              value={values.username}
+            />
+            {errors.username &&<h1 style={{ fontSize: 10, color: 'red' }}>{errors.username}</h1>}
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+            />
+            {errors.password && <h1 style={{ fontSize: 10, color: 'red' }}>{errors.password}</h1>}
+            <button type="submit">Submit</button>
+          </form>
+        )}
+      </Formik>
     </div>
-  )
+  );
 }
 
-export default SignUp;
+export default Signup;
