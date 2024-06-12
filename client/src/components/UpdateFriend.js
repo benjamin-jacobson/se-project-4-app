@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 // import React from "react";
-import { Formik, Field  } from "formik";
+import { Formik, Field, resetForm  } from "formik";
 import * as yup from "yup";
 
 function UpdateFriend({handleUpdateFren, friends}) {
-    // const [name, setName] = useState('');
-    // const [birthday, setBirthday] = useState('');
-    // const [favoriteColor, setFavoriteColor] = useState('');
-    // const [userId, setUserId] = useState('');
-    // const [id, setId] = useState('');
 
     const loginValidationSchema = yup.object().shape({
       friendId: yup.number("Must be a number type"),
@@ -17,12 +12,6 @@ function UpdateFriend({handleUpdateFren, friends}) {
       favorite_color:yup.string(),
       user_id: yup.number("Must be a number type")})
 
-      // const options = [
-      //   { id: 1, value: 'Option 1' },
-      //   { id: 2, value: 'Option 2' },
-      //   { id: 3, value: 'Option 3' },
-      // ];
-
       console.log(friends)
 
   return (
@@ -30,8 +19,12 @@ function UpdateFriend({handleUpdateFren, friends}) {
           <h1>Update Friend</h1>
           <Formik
           validationSchema={loginValidationSchema}
-            initialValues={{}}
-            onSubmit={values => { //console.log(values)
+            initialValues={{
+              // name: '',
+              // birthday: '',
+              // favorite_color: '',
+            }}
+            onSubmit={(values, { resetForm }) => { //console.log(values)
                       fetch(`/friends/${values.id}`, {
                         method: "PATCH",
                         headers: {"Content-Type": "application/json",},
@@ -39,9 +32,10 @@ function UpdateFriend({handleUpdateFren, friends}) {
                       }).then(
                         (res) => {
                           if (res.ok) {
-                            console.log("okkkk")
-                            // res.json().then((user) => setUser(user)); // OR could make them still log in by redirecting to app "/" and not setting user
-                            // window.location.href = "/home";
+                            console.log("ok")
+                            handleUpdateFren(values)
+                            window.location.reload(); // better with controlled state but time consuming lol
+                            
                         }
                       }
                       )

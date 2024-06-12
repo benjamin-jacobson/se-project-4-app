@@ -2,58 +2,37 @@ import NavBar from "../components/NavBar";
 import Header from "../components/Header";
 import AddFriendMeeting from "../components/AddFriendMeeting";
 import NewMeetup from "../components/NewMeetup";
+import MeetingCard from "../components/MeetingCard";
 
 import { useState, useEffect } from "react";
 
 function Meetings(){
+
+  const [allMeetings, setAllMeetings] = useState([])
+
+  useEffect(() =>{
+    fetch("/friends")
+      .then(r => r.json())
+      .then(data => setAllMeetings(data))
+      .catch(error => console.error(error))
+  }, [])
+
+  console.log("allmeetings")
+  console.log(allMeetings)
+  console.log("allmeetings")
+  const userList = allMeetings.map(
+    f => {
+    return <MeetingCard name={f.name} user_id={f.user_id} meetings={f.meetings}/>
+  });
+
+
   return (
+    <>
     <NewMeetup />
+    <h1>Meetings on the books</h1>
+    {userList}
+    </>
   )
 }
 
 export default Meetings;
-
-
-// function Meetings() {
-
-//   const [dropdownDataFriends, setDropdownDataFriends] = useState([])
-//   const [selectedFriendId, setSelectedFriendId] = useState('');
-  
-//   // Handle change event
-//   const handleChange = (event) => {
-//     setSelectedFriendId(event.target.value);
-//   };
-
-//   useEffect(() =>{
-//     fetch("/friends")
-//       .then(r => r.json())
-//       .then(data => setDropdownDataFriends(data))
-//       .catch(error => console.error(error))
-//   }, [])
-//   console.log(dropdownDataFriends)
-
-//   return (
-//     <>
-//       <main>
-//         <h1>This is Meeting component.</h1>
-//         <div className="App">
-//       <h1>Select a friend</h1>
-//       <select value={selectedFriendId} onChange={handleChange}>
-//         <option value="" disabled>Select an option</option>
-//         {dropdownDataFriends.map((option) => (
-//           <option key={option.id} value={option.id}>
-//             {option.name}
-//           </option>
-//         ))}
-//       </select>
-//       <p>Selected Friend: {selectedFriendId}</p>
-//     </div>
-//         <h1>Enter the meeting details.</h1>
-//         <AddFriendMeeting />
-//       </main>
-//     </>
-//   )
-
-
-// };
-

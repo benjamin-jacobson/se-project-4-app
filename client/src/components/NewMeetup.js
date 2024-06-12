@@ -37,8 +37,6 @@ function NewMeetup() {
             friend_id: Number(selectedFriendId),
             date: date,
     };
-    console.log("test")
-    console.log(formData)
     fetch("/meetups", {
       method: "POST",
       headers: {"Content-Type": "application/json",},

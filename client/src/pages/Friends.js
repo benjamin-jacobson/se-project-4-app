@@ -29,11 +29,15 @@ function Friends() {
   }
 
   const handleUpdateFren = (updatedFriend) => {
-    const updatedFriendssArray = friends.map(fren => {
-      if (fren.id === updatedFriend.id) return updatedFriend
-      else return fren;  
+    const updatedFriendsArray = friends.map(fren => {
+      if (fren.id === parseInt(updatedFriend.id)) {
+        const updatedFren = { ...fren, ...updatedFriend }; // only updates keys that changed
+        return updatedFren;
+      } else {
+        return fren;  
+      }
     });
-    setFriends(updatedFriendssArray);
+    setFriends(updatedFriendsArray);
   }
 
   const displayedFrens = friends.filter((fren) =>
