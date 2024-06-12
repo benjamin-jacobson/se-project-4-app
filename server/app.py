@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 from config import app, db, api
 from models import User, Friend, Activity, Meeting
+from datetime import datetime
 
 # @app.before_request
 # def check_if_logged_in():
@@ -122,23 +123,34 @@ class FriendById(Resource):
 
     def patch(self, id):
         record = Friend.query.filter_by(id=id).first()
-        for attr in request.form:
-            setattr(record, attr, request.form[attr])
+        data = request.get_json()
+        for attr in data:
+            if attr == 'birthday':
+                try:
+                    # Assuming the birthday is in 'YYYY-MM-DD' format
+                    birthday = datetime.strptime(data[attr], '%Y-%m-%d').date()
+                    setattr(record, attr, birthday)
+                except ValueError:
+                    return make_response({"error": "Invalid date format. Expected 'YYYY-MM-DD'."}, 400)
+            else:
+                setattr(record, attr, data[attr])
 
         db.session.add(record)
         db.session.commit()
 
-        response_dict = record.to_dict()
-
-        response = make_response(response_dict, 200 )
+        response = make_response(record.to_dict(), 200 )
         return response
 
 class Meetups(Resource):
     
     def post(self): 
+        
+        date_str = request.json["date"]
+        date_obj = datetime.fromisoformat(date_str)
+
         try:
             meetup = Meeting(
-                date= request.json["date"],
+                date= date_obj,
                 friend_id = request.json["friend_id"],
                 activity_id = request.json["activity_id"]
             )
@@ -146,7 +158,8 @@ class Meetups(Resource):
             db.session.add(meetup)
             db.session.commit()
             
-            return meetup.activity.to_dict(), 201
+            # return meetup.activity.to_dict(), 201
+            return meetup.to_dict(), 201
         
         except:
             return {"error": "400: Validation error"}, 400
@@ -157,7 +170,7 @@ class Activities(Resource):
         return make_response(activities,201)
 
 api.add_resource(Activities, '/activities', endpoint='activities')
-api.add_resource(Meetups, "/meetups") 
+api.add_resource(Meetups, "/meetups", endpoint='meetups') 
 api.add_resource(ClearSession, '/clear', endpoint='clear')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')

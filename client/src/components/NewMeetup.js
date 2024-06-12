@@ -33,25 +33,22 @@ function NewMeetup() {
   function handleSubmit(e) {
     e.preventDefault();
     const formData = {
-            activity_id: activityId,
-            friend_id: selectedFriendId,
+            activity_id: Number(activityId),
+            friend_id: Number(selectedFriendId),
             date: date,
     };
+    console.log("test")
+    console.log(formData)
     fetch("/meetups", {
       method: "POST",
       headers: {"Content-Type": "application/json",},
       body: JSON.stringify(formData),
     }).then((r) => {
-      if (r.ok) {
-        r.json().then((activity) => {
-          setDate("");
-          setActivityId("");
-          setErrors([]);
-          // onAddActivity(activity);
-        });
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
+      console.log("yay")
+      setSelectedFriendId("")
+      setDate("")
+      setActivityId("")
+      // TODO add any state update?
     });
   }
 

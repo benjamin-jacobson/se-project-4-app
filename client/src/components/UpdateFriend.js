@@ -1,81 +1,115 @@
 import React, { useState } from 'react';
+// import React from "react";
+import { Formik, Field  } from "formik";
+import * as yup from "yup";
 
-function UpdateFriend({handleUpdateFren}) {
-    const [name, setName] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [favoriteColor, setFavoriteColor] = useState('');
-    const [userId, setUserId] = useState('');
-    const [id, setId] = useState('');
+function UpdateFriend({handleUpdateFren, friends}) {
+    // const [name, setName] = useState('');
+    // const [birthday, setBirthday] = useState('');
+    // const [favoriteColor, setFavoriteColor] = useState('');
+    // const [userId, setUserId] = useState('');
+    // const [id, setId] = useState('');
 
+    const loginValidationSchema = yup.object().shape({
+      friendId: yup.number("Must be a number type"),
+      name: yup.string().min(1, ({ min }) => `Password must be at least ${min} characters`),
+      birthday:yup.string(),
+      favorite_color:yup.string(),
+      user_id: yup.number("Must be a number type")})
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const updatedFren = {
-                              id: id,
-                              name: name,
-                              birthday: birthday,
-                              favoriteColor: favoriteColor,
-                              userId: userId
-                            }
-        
-                            handleUpdate(updatedFren)
-                          }
-                        
-        const handleUpdate = async (updatedFren) => {
-          const response = await fetch(`/friends/${id}`, {
-            method: "PATCH",
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify(updatedFren),
-          })
-          const data = await response.json();
-          handleUpdateFren(data)
-               }
+      // const options = [
+      //   { id: 1, value: 'Option 1' },
+      //   { id: 2, value: 'Option 2' },
+      //   { id: 3, value: 'Option 3' },
+      // ];
 
-    return (
-        <div>
-            <h1>Update Friend</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="id">Friend ID:</label>
-                <input
-                    type="number"
+      console.log(friends)
+
+  return (
+        <div className="loginContainer">
+          <h1>Update Friend</h1>
+          <Formik
+          validationSchema={loginValidationSchema}
+            initialValues={{}}
+            onSubmit={values => { //console.log(values)
+                      fetch(`/friends/${values.id}`, {
+                        method: "PATCH",
+                        headers: {"Content-Type": "application/json",},
+                        body: JSON.stringify(values),
+                      }).then(
+                        (res) => {
+                          if (res.ok) {
+                            console.log("okkkk")
+                            // res.json().then((user) => setUser(user)); // OR could make them still log in by redirecting to app "/" and not setting user
+                            // window.location.href = "/home";
+                        }
+                      }
+                      )
+                    }
+                  }
+            
+          >
+            {({ handleChange, handleBlur, handleSubmit, values, errors, }) => (
+              <form onSubmit={handleSubmit}>
+
+                  <label htmlFor="dropdown">Select an option:</label>
+                  <select
+                    name="id"
                     id="id"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                    required
-                /><br />
-                <label htmlFor="name">Name:</label>
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.dropdown}
+                  >
+                    <option value="" label="Select an option" />
+                    {friends.map((f) => (
+                      <option key={f.id} value={f.id}>
+                        {f.name}
+                      </option>
+                    ))}
+                  </select>
+                  {/* <input
+                  type="friendId"
+                  name="friendId"
+                  placeholder="friendId"
+                  onChange={handleChange('friendId')}
+                  onBlur={handleBlur('friendId')}
+                  value={values.friendId}
+                />
+                {errors.friendId &&<h1 style={{ fontSize: 10, color: 'red' }}>{errors.friendId}</h1>} */}
                 <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                /><br />
-                <label htmlFor="birthday">Birthday:</label>
+                  type="name"
+                  name="name"
+                  placeholder="Update name ..."
+                  onChange={handleChange('name')}
+                  onBlur={handleBlur('name')}
+                  value={values.name}
+                />
+                {errors.name && <h1 style={{ fontSize: 10, color: 'red' }}>{errors.name}</h1>}
+                  <input
+                  type="date"
+                  name="birthday"
+                  placeholder="birthday"
+                  onChange={handleChange('birthday')}
+                  onBlur={handleBlur('birthday')}
+                  value={values.birthday}
+                />
+                {errors.birthday && <h1 style={{ fontSize: 10, color: 'red' }}>{errors.birthday}</h1>}
                 <input
-                    type="date"
-                    id="birthday"
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
-                /><br />
-                <label htmlFor="favoriteColor">Favorite Color:</label>
-                <input
-                    type="text"
-                    id="favoriteColor"
-                    value={favoriteColor}
-                    onChange={(e) => setFavoriteColor(e.target.value)}
-                /><br />
-                <label htmlFor="userId">User ID:</label>
-                <input
-                    type="number"
-                    id="userId"
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
-                /><br />
-                <button type="submit">Update Friend</button>
-            </form>
+                  type="favorite_color"
+                  name="favorite_color"
+                  placeholder="Update favorite color ..."
+                  onChange={handleChange('favorite_color')}
+                  onBlur={handleBlur('favorite_color')}
+                  value={values.favorite_color}
+                />
+                {errors.favorite_color && <h1 style={{ fontSize: 10, color: 'red' }}>{errors.favorite_color}</h1>}
+                
+                <button type="submit">Submit</button>
+              </form>
+            )}
+          </Formik>
         </div>
-    );
-}
+      );
+    }
 
 export default UpdateFriend;

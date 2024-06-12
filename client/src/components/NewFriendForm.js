@@ -22,7 +22,7 @@ function NewFriendForm({ onAddFriend }) {
 
   return (
     <div className="new-friend-form">
-      <h2>New Friend</h2>
+      <h1>New Friend</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

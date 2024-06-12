@@ -5,18 +5,12 @@ import * as yup from "yup";
 function Signup({setUser}) {
 
   const loginValidationSchema = yup.object().shape({
+    username: yup.string().min(3, ({ min }) => `Username must be at least ${min} characters`).required('Username is Required'),
+    password: yup.string().min(3, ({ min }) => `Password must be at least ${min} characters`).required('Password is required'),
     // email: yup
     //   .string()
     //   .email("Please enter valid email")
     //   .required('Email Address is Required'),
-    username: yup
-      .string()
-      .min(3, ({ min }) => `Username must be at least ${min} characters`)
-      .required('Username is Required'),
-    password: yup
-      .string()
-      .min(3, ({ min }) => `Password must be at least ${min} characters`)
-      .required('Password is required'),
   })
 
   return (
@@ -45,15 +39,6 @@ function Signup({setUser}) {
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, }) => (
           <form onSubmit={handleSubmit}>
-            {/* <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              onChange={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-            />
-            {errors.email &&<h1 style={{ fontSize: 10, color: 'red' }}>{errors.email}</h1>} */}
               <input
               type="username"
               name="username"
@@ -72,6 +57,15 @@ function Signup({setUser}) {
               value={values.password}
             />
             {errors.password && <h1 style={{ fontSize: 10, color: 'red' }}>{errors.password}</h1>}
+            {/* <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              onChange={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+            {errors.email &&<h1 style={{ fontSize: 10, color: 'red' }}>{errors.email}</h1>} */}
             <button type="submit">Submit</button>
           </form>
         )}

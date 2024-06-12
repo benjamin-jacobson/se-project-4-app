@@ -21,7 +21,10 @@ function Home({user, handleLogout}) {
   return (
     <>
       <main>
-        <h1>Home Page!</h1>
+        <h1>Home Page - My Friends!</h1>
+        
+        <h1> My Meetings</h1>
+        <h1>Users</h1>
         {userList}
       </main>
     </>

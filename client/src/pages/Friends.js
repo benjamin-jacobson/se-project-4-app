@@ -51,7 +51,7 @@ function Friends() {
         <h1>This is frieds component.</h1>
         <NewFriendForm onAddFriend={handleAddFriend} onDeleteFriend={handleDeleteFriend} />
         <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
-        <UpdateFriend handleUpdateFren={handleUpdateFren}/>
+        <UpdateFriend handleUpdateFren={handleUpdateFren} friends={friends}/>
         <ul>{arrayDataItems}</ul>
       </main>
     </>
