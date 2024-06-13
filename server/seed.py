@@ -12,6 +12,7 @@ with app.app_context():
     User.query.delete()
     Friend.query.delete()
     Meeting.query.delete()
+    Activity.query.delete()
 
     fake = Faker()
 

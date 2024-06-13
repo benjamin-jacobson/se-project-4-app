@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function NewMeetup() {
+function NewMeetup({handleAddMeeting}) {
   const [activities, setActivities] = useState([])
 
   const [date, setDate] = useState("");
@@ -10,13 +10,14 @@ function NewMeetup() {
   const [dropdownDataFriends, setDropdownDataFriends] = useState([])
   const [selectedFriendId, setSelectedFriendId] = useState('');
 
+  // activities used for a filter
   useEffect(() => {
     fetch("/activities")
       .then((r) => r.json())
       .then(data => setActivities(data))
       .catch(error => console.error(error))
     }, []);
-    console.log(activities)
+    // console.log(activities)
 
   useEffect(() =>{
     fetch("/friends")
@@ -43,10 +44,12 @@ function NewMeetup() {
       body: JSON.stringify(formData),
     }).then((r) => {
       console.log("yay")
+      console.log(formData)
+      handleAddMeeting(formData)
       setSelectedFriendId("")
       setDate("")
       setActivityId("")
-      // TODO add any state update?
+      
     });
   }
 

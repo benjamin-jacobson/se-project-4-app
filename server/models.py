@@ -45,7 +45,9 @@ class Friend(db.Model, SerializerMixin):
 
     # meetings = db.relationship('Meeting', secondary=friend_meetings, back_populates='friends') # Relationship mapping the friends to related meetings
 
-    meetings = db.relationship("Meeting", backref= "friend")
+    # meetings = db.relationship("Meeting", backref= "friend")
+    meetings = db.relationship("Meeting", cascade="all,delete", backref= "friend") # resent change
+    
     activities = association_proxy("meetings", "activity")
     serialize_rules = ("-meetings.friend",)
 

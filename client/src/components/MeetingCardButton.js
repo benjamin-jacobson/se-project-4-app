@@ -7,13 +7,13 @@ function MeetingCardButton({meeting, onDeleteMeeting}) {
     });
       if (response.ok) {
         onDeleteMeeting(meeting.id);
-        alert("Deleted Successfully")
+        alert("Deleted Successfully, meeting id: " + meeting.id + " 💣")
       }
   }
 
     return (
       <>
-        <div>Date: {meeting.date}</div>
+        <div>MeetingID: {meeting.id} Date: {meeting.date}</div>
         <button onClick={handleDeleteClick} >Delete meeting</button>
       </>
     )

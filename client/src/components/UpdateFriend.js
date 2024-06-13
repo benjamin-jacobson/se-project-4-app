@@ -34,7 +34,7 @@ function UpdateFriend({handleUpdateFren, friends}) {
                           if (res.ok) {
                             console.log("ok")
                             handleUpdateFren(values)
-                            window.location.reload(); // better with controlled state but time consuming lol
+                            window.location.reload(); // better with controlled state but time consuming lol TODO 
                             
                         }
                       }

@@ -4,7 +4,7 @@ function MeetingCard({name, user_id, meetings, handleDeleteMeeting}) {
 
     return (
       <article>
-          <h2>{user_id}: {name}</h2>
+          <h2>Userid {user_id}: Friend:{name}</h2> 
           <ul>
         {meetings.map(meeting => (
           <li key={meeting.id}>
