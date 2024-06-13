@@ -1,11 +1,14 @@
-function MeetingCard({name, user_id, meetings}) {
+import MeetingCardButton from './MeetingCardButton.js'
+
+function MeetingCard({name, user_id, meetings, handleDeleteMeeting}) {
+
     return (
       <article>
           <h2>{user_id}: {name}</h2>
           <ul>
         {meetings.map(meeting => (
           <li key={meeting.id}>
-            <div>Date: {meeting.date}</div>
+            <MeetingCardButton meeting={meeting} onDeleteMeeting={handleDeleteMeeting} />
           </li>
         ))}
       </ul>

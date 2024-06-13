@@ -59,7 +59,7 @@ class Login(Resource):
         username = request.get_json()['username']
         password = request.get_json()['password']
         user = User.query.filter(User.username == username).first()
-        print(f'=========checking user {user}')
+        print(f'hecking user {user}')
         if user:
             if user.authenticate(password):
                 session['user_id'] = user.id
@@ -142,7 +142,7 @@ class FriendById(Resource):
         return response
 
 class Meetups(Resource):
-    
+
     def post(self): 
         
         date_str = request.json["date"]
@@ -163,6 +163,21 @@ class Meetups(Resource):
         
         except:
             return {"error": "400: Validation error"}, 400
+class MeetupsById(Resource):
+    def get(self, id):
+        response_dict = Meeting.query.filter_by(id=id).first().to_dict()
+        response = make_response(response_dict,200,)
+        return response
+    
+    def delete(self, id):
+        record = Meeting.query.filter_by(id=id).first()
+        db.session.delete(record)
+        db.session.commit()
+        response_dict = {"message": "Record successfully deleted"}
+
+        response = make_response(response_dict, 200)
+        return response
+
 
 class Activities(Resource):
     def get(self):
@@ -181,7 +196,7 @@ api.add_resource(Users, '/users', endpoint='users')
 
 api.add_resource(Friends, '/friends', endpoint='friends')
 api.add_resource(FriendById, '/friends/<int:id>')
-
+api.add_resource(MeetupsById, '/meetups/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

@@ -17,7 +17,13 @@ function NewFriendForm({ onAddFriend }) {
       }),
     })
       .then((r) => r.json())
-      .then((newFriend) => onAddFriend(newFriend));
+      .then((newFriend) => {
+        onAddFriend(newFriend);
+        setName("");
+        setFavoriteColor("");
+      }
+    );
+      
   }
 
   return (
