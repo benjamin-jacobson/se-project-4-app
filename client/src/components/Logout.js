@@ -18,7 +18,7 @@ function Logout({handleLogout}) {
 });
   }
 
-  return (<button onClick={enactLogout}>Log Me Out</button>
+  return (<button className="float-right flex" onClick={enactLogout}>Log Me Out</button>
   )
 }
   

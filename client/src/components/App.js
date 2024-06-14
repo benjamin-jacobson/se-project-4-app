@@ -21,14 +21,11 @@ function App() {
     });
   }, []); // TODO does this need to run every time the APP loads, or just certain pages?
 
-  // function handleLogout() {setUser(null);} // also redirect
-  function handleLogout() {console.log("iraaaefasabennnnn");}
-  console.log("I ran 3")
-  console.log(handleLogout)
-  console.log("I ran 4")
+  function handleLogout() {setUser(null);} // also redirect
+  // function handleLogout() {console.log("iraaaefasabennnnn");}
   
   return(
-  <main>
+  <main >
     
   {user ? (<>
           <Header handleLogout={handleLogout}/>

@@ -4,7 +4,7 @@
 
 // ReactDOM.render(<App />, document.getElementById("root"));
 
-
+import styles from "./index.css" // This is for tailwin
 // index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
