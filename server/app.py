@@ -142,6 +142,7 @@ class FriendById(Resource):
         return response
 
 class Meetups(Resource):
+    # Nwws TO ADD THE GET
 
     def post(self): 
         
@@ -183,6 +184,8 @@ class Activities(Resource):
     def get(self):
         activities = [u.to_dict() for u in Activity.query.all()] # TODO this isnt working ugggghhh needed for the form on meetings ///newMeetup
         return make_response(activities,201)
+
+    # Need to add the post
 
 api.add_resource(Activities, '/activities', endpoint='activities')
 api.add_resource(Meetups, "/meetups", endpoint='meetups') 
