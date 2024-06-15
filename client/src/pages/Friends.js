@@ -51,8 +51,12 @@ function Friends() {
 
   return (
     <>
-      <main>
-        <h1>This is frieds component.</h1>
+
+      
+      <main  class="max-w-sm mx-auto">
+        <br></br>
+        <h1 class="text-teal-300 text-xl">Add, edit or delete your fren content here!</h1>
+        <br></br>
         <NewFriendForm onAddFriend={handleAddFriend} onDeleteFriend={handleDeleteFriend} />
         <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
         <UpdateFriend handleUpdateFren={handleUpdateFren} friends={friends}/>

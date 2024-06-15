@@ -12,6 +12,10 @@ function NewFriendForm({ onAddFriend }) {
 
 return (
   <div className="new-friend-form">
+    <span class="absolute px-3 font-medium text-slate-300 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-300">Add new fren</span>
+    <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"></hr>
+    {/* <h2 class="text-slate-400">Add new fren</h2> */}
+    {/* <br></br> */}
   <Formik
   validationSchema={newFreiendFormValidationSchema}
     initialValues={{ name: '', favorite_color: '' }}
