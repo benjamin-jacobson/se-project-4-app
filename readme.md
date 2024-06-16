@@ -3,6 +3,12 @@
 ## Overview: 
 
 
+# App Flow
+![Rough Flowchart](readme/AppFlowLayout.JPG)
+
+# Database Architecture
+![Rough Flowchart](readme/erd.JPG)
+
 # Setup
 
 mkdir preject

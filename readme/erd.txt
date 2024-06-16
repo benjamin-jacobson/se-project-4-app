@@ -1,0 +1,33 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table users {
+  id integer [primary key]
+  username varchar
+  _password_hash varchar
+}
+
+Table friends {
+  id integer  pk
+  name varchar
+  birthday date
+  favorite_color varchar
+  user_id integer
+}
+
+Table meetings {
+  id integer  pk
+  date date
+  friend_id integer
+  activity_id integer
+  }
+
+Table activities {
+  id integer pk
+  name varchar
+  location varchar
+  type varchar
+}
+Ref: users.id < friends.user_id
+Ref: friends.id < meetings.friend_id
+Ref: activities.id < meetings.activity_id
