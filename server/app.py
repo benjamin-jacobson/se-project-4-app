@@ -85,6 +85,7 @@ class Friends(Resource):
         user = User.query.filter(User.id == session['user_id']).first()
         friends = [f.to_dict() for f in user.friends]
         return make_response(friends,201)
+        
     def post(self):
         data = request.get_json()
     
@@ -182,10 +183,24 @@ class MeetupsById(Resource):
 
 class Activities(Resource):
     def get(self):
-        activities = [u.to_dict() for u in Activity.query.all()] # TODO this isnt working ugggghhh needed for the form on meetings ///newMeetup
+        activities = [u.to_dict() for u in Activity.query.all()] 
         return make_response(activities,201)
 
-    # Need to add the post
+    def post(self): 
+
+        try:
+            activity = Activity(
+                name= request.json["name"],
+                location = request.json["location"],
+                type = request.json["type"]
+            )
+            
+            db.session.add(activity)
+            db.session.commit()
+            
+            return activity.to_dict(), 201
+        except:
+            return {"error": "400: Validation error"}, 400
 
 api.add_resource(Activities, '/activities', endpoint='activities')
 api.add_resource(Meetups, "/meetups", endpoint='meetups') 

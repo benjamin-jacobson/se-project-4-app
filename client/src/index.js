@@ -18,6 +18,8 @@ import About from "./pages/About";
 import Signup from "./pages/Signup";
 import NoAccess from "./pages/NoAccess.js";
 import Meetings from "./pages/Meetings.js";
+import Activity from "./pages/Activity.js";
+
 //ErrorPage
 
 const router = createBrowserRouter([
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path:"friends", element: <Friends />},
       { path: "about", element: <About /> },
-      // { path: "login", element: <Login /> },
+      { path: "activities", element: <Activity /> },
       { path: "signup", element: <Signup /> },
       { path: "meetings", element: <Meetings /> },
       { path: "noaccess", element: <NoAccess /> },

@@ -5,6 +5,7 @@ import Header from "../components/Header";
 function Home({user, handleLogout}) {
 
   const [allUsers, setAllUsers] = useState([])
+  const [currentUser, setCurrentUser] = useState([])
 
   useEffect(() =>{
     fetch("/users")
@@ -12,6 +13,11 @@ function Home({user, handleLogout}) {
       .then(data => setAllUsers(data))
       .catch(error => console.error(error))
   }, [])
+
+  console.log(allUsers)
+
+  // const result = allUsers.find(obj => obj.id === session.get('user_id');
+
 
   const userList = allUsers.map(
     user => {

@@ -1,17 +1,24 @@
 import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
 
-function NavBar() {
+function NavBar({handleLogout}) {
 
   return (
     <div>
-    <nav>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/friends"> Friends</NavLink>
-      <NavLink to="/about"> About</NavLink>
-      {/* <NavLink to="/login"> Login</NavLink> */}
-      <NavLink to="/meetings"> Meetings</NavLink>
-      {/* <NavLink to="/noaccess"> NoAccess</NavLink> */}
-    </nav>
+      <nav class="flex items-center justify-between flex-wrap bg-teal-400 p-6">
+          <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <span class="font-semibold text-xl tracking-tight">WenFren</span>
+          </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+           <div class="lg:flex-grow">
+              <NavLink className="text-white hover:underline" to="/friends"> Friends</NavLink>
+              <NavLink className="text-white hover:underline" to="/meetings"> Meetings</NavLink>
+              <NavLink className="text-white hover:underline" to="/activities"> Activities</NavLink>
+              </div>
+              <Logout handleLogout={handleLogout} />
+              </div>
+              
+      </nav>
   </div>
   )
 }

@@ -1,5 +1,3 @@
-// import NavBar from "../components/NavBar";
-
 import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -26,11 +24,11 @@ return (
                   headers: {"Content-Type": "application/json",},
                   body: JSON.stringify(values),
                 }).then((r) => {
-                  //setIsLoading(false);
                   if (r.ok) {
                     r.json().then((user) => setUser(user));
-                    console.log("Logged in and redirecting to /home")
-                    navigate("/home");
+                    console.log("Logged in and redirecting to /friends")
+                    // navigate("/home");
+                    navigate("/friends");
                   } else {
                     // r.json().then((err) => setErrors(err.errors));
                     console.log("Incorrect username and/or password.")
