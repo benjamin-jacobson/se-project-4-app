@@ -27,7 +27,6 @@ return (
                   if (r.ok) {
                     r.json().then((user) => setUser(user));
                     console.log("Logged in and redirecting to /friends")
-                    // navigate("/home");
                     navigate("/friends");
                   } else {
                     // r.json().then((err) => setErrors(err.errors));

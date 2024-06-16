@@ -8,12 +8,8 @@ const newMeetupFormValidationSchema = yup.object().shape({
 
 function NewMeetup({ handleAddMeeting }) {
   const [activities, setActivities] = useState([])
-  // const [date, setDate] = useState("");
-  // const [activityId, setActivityId] = useState("");
-  // const [errors, setErrors] = useState([]);
 
   const [dropdownDataFriends, setDropdownDataFriends] = useState([])
-  // const [selectedFriendId, setSelectedFriendId] = useState('');
 
   // activities used for a filter
   useEffect(() => {
@@ -61,9 +57,6 @@ return (
                     console.log("yay")
                     console.log(newValues)
                     handleAddMeeting(newValues)
-                    // setSelectedFriendId("")
-                    // setDate("")
-                    // setActivityId("")
                     resetForm()
                     
                   }

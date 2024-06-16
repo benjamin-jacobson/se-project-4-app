@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 function Meetings(){
 
-  const [friends, setFriends] = useState([]) // Need to fix which state is being used and how to update meetings
+  const [friends, setFriends] = useState([])
 
     function handleAddMeeting(obj) {
       if (!obj || !obj.friend_id) {
@@ -44,7 +44,7 @@ function Meetings(){
         meetings: friend.meetings.filter(meeting => meeting.id !== idToDelete)
       };
     });
-    setFriends(updatedFriends); // MAKE SURE THIS IS THE RIGHT FRIEND! NOT ALL OF THEM
+    setFriends(updatedFriends);
   };
 
 

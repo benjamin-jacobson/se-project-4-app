@@ -43,9 +43,6 @@ class Friend(db.Model, SerializerMixin):
 
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id')) # for logged in user
 
-    # meetings = db.relationship('Meeting', secondary=friend_meetings, back_populates='friends') # Relationship mapping the friends to related meetings
-
-    # meetings = db.relationship("Meeting", backref= "friend")
     meetings = db.relationship("Meeting", cascade="all,delete", backref= "friend") # resent change
     
     activities = association_proxy("meetings", "activity")
@@ -76,6 +73,3 @@ class Meeting(db.Model, SerializerMixin):
     activity_id = db.Column(db.Integer, db.ForeignKey("activities.id"))
 
     serialize_rules = ("-friend.meetings", "-activity.meetings")
-
-    
-    

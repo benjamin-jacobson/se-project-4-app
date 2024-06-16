@@ -22,11 +22,11 @@ function Activity() {
     setActivities(updatedActivitiesArray);
   }
 
-  const displayedFrens = activities.filter((fren) =>
-  fren.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const displayedActivities = activities.filter((i) =>
+  i.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const arrayDataItems = displayedFrens.map((i) => (
+  const arrayDataItems = displayedActivities.map((i) => (
     <ul class="list-inside" >
     <li key={i.id} className=" centered max-w-sm mx-auto font-medium text-slate-600">- {i.name}, {i.location},{i.type}</li> 
     </ul>
