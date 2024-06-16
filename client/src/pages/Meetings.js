@@ -66,9 +66,25 @@ function Meetings(){
 
   return (
     <>
-    <NewMeetup handleAddMeeting={handleAddMeeting} />
-    <h1>Meetings on the books</h1>
-    {meetingInformationDisplayArray}
+    <div class="flex">
+    <div class="split w-1/2 ">
+      <div class="centered">
+      <h1 class=" max-w-sm mx-auto text-teal-300 text-xl">Create meetups with yo fren!</h1>
+      {/* <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"></hr>
+      <span class=" font-medium text-slate-300 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-300">Add new meetups</span> */}
+        <NewMeetup handleAddMeeting={handleAddMeeting} />
+      </div>
+    </div>
+
+    <div class="split w-1/2 bg-gray-300">
+      <div class="centered">
+      <h1 class=" max-w-sm mx-auto text-teal-300 text-xl">My meetups!</h1>
+        <h2 class="text-xl font-bold mb-2">John Doe</h2>
+        <p>Meetings on the books.</p>
+        <ul>{meetingInformationDisplayArray}</ul>
+      </div>
+    </div>
+  </div>
     </>
   )
 }

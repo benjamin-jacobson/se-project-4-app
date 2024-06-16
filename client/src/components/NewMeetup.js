@@ -33,11 +33,9 @@ function NewMeetup({ handleAddMeeting }) {
 
 return (
   <div class="max-w-sm mx-auto" >
-    <br></br>
-        <h1 class=" max-w-sm mx-auto text-teal-300 text-xl">Create a meetup with yo frend here!</h1>
-      <br></br>
-    <span class="absolute px-3 font-medium text-slate-300 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-300">Add new meetup</span>
-    <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"></hr>
+      <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"></hr>
+      <span class=" font-medium text-slate-300 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-300">Add new meetups</span>
+
   <Formik
   validationSchema={newMeetupFormValidationSchema}
   initialValues={{
