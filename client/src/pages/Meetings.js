@@ -60,7 +60,13 @@ function Meetings(){
   console.log("allmeetings")
   const meetingInformationDisplayArray = friends.map(
     f => {
-    return <MeetingCard name={f.name} user_id={f.user_id} meetings={f.meetings} handleDeleteMeeting={handleDeleteMeeting}/>
+    return (
+      <>
+       <MeetingCard name={f.name} user_id={f.user_id} meetings={f.meetings} handleDeleteMeeting={handleDeleteMeeting}/>
+       <br></br>
+      </>
+    )
+   
   });
 
 
@@ -76,11 +82,10 @@ function Meetings(){
       </div>
     </div>
 
-    <div class="split w-1/2 bg-gray-300">
+    <div class="split w-1/2 ">
       <div class="centered">
-      <h1 class=" max-w-sm mx-auto text-teal-300 text-xl">My meetups!</h1>
-        <h2 class="text-xl font-bold mb-2">John Doe</h2>
-        <p>Meetings on the books.</p>
+      <h1 class=" max-w-sm mx-auto text-teal-300 text-xl">My upcoming meetups!</h1>
+      <br></br>
         <ul>{meetingInformationDisplayArray}</ul>
       </div>
     </div>
