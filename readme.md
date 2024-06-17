@@ -4,8 +4,8 @@
 ![UI](readme/ui_friend_page.JPG)
 
 ## Overview: 
-- Flask API (python) backend with a React frontend.
-- Fou models on the backend, that including
+- Flask SQLAlchemy API (python) backend with a React frontend.
+- Four models on the backend, that including
     - one-to-many relationships.
     - reciprocal many-to-many relationship. (with user submitable attribute)
 - Full CRUD on at least 1 model, following REST conventions.
@@ -13,6 +13,8 @@
 - Forms and validation through Formik on all input (use of Yup)
 - Multiple client-side routes using React Router (with NavBar).
 - Connect the client and server using fetch()
+- User signup, authentication and authorizations.
+- Hashed assword storage, encryption, salting.
 
 # User Stories
 - As a user, I can:
