@@ -14,6 +14,7 @@ function NavBar({handleLogout}) {
               <NavLink className="text-white hover:underline" to="/friends"> Friends</NavLink>
               <NavLink className="text-white hover:underline" to="/meetings"> Meetings</NavLink>
               <NavLink className="text-white hover:underline" to="/activities"> Activities</NavLink>
+              <NavLink className="text-white hover:underline" to="/frenbot"> Frenbot</NavLink>
               </div>
               <Logout handleLogout={handleLogout} />
               </div>

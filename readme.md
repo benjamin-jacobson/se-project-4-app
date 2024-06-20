@@ -15,6 +15,10 @@
 - Connect the client and server using fetch()
 - User signup, authentication and authorizations.
 - Hashed assword storage, encryption, salting.
+- Adding useContext
+- Adding external API integration with openAi chatgpt
+
+![UI](readme/ui_frenbot.JPG)
 
 # User Stories
 - As a user, I can:

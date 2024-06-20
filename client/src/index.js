@@ -9,6 +9,7 @@ import Friends from "./pages/Friends.js";
 import Signup from "./pages/Signup";
 import Meetings from "./pages/Meetings.js";
 import Activity from "./pages/Activity.js";
+import ChatBot from "./pages/ChatBot.js";
 
 //ErrorPage
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path:"friends", element: <Friends />},
       { path: "activities", element: <Activity /> },
       { path: "meetings", element: <Meetings /> },
+      { path: "frenbot", element: <ChatBot /> },
     ],
   },
 ]);
