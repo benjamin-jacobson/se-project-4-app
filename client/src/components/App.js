@@ -7,6 +7,7 @@ import Signup from "../pages/Signup";
 import LoginSignup from "../pages/LoginSignup.js"
 import Header from "../components/Header";
 
+export const Cont = React.createContext();
 
 function App() {
   const [user, setUser] = useState(null);
@@ -26,7 +27,9 @@ function App() {
   return(
     <main >
       {user ? (<>
+              <Cont.Provider value={user}>
               <Header handleLogout={handleLogout}/>
+              </Cont.Provider>
               <Outlet />
               </>) 
       : (<LoginSignup setUser={setUser} />)}

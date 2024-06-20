@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Logout from "./Logout";
 
+
 function NavBar({handleLogout}) {
 
   return (
